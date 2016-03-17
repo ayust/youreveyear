@@ -1,0 +1,12 @@
+application: youreveyear
+version: 16
+runtime: python27
+threadsafe: yes
+api_version: 1
+
+handlers:
+- url: /$
+  static_files: static/index.html
+  upload: static/index.html
+- url: /
+  static_dir: static

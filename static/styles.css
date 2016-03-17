@@ -1,0 +1,277 @@
+/* http://paletton.com/#uid {
+72W0u0kBqGxkVKjqQHAGxsMIfmq */
+
+body {
+    background: #000;
+    color: #fff;
+    font-variant: small-caps;
+}
+
+h1 {
+    font-weight: bold;
+    text-align: center;
+}
+
+h3 {
+    font-weight: bold;
+    text-align: center;
+}
+
+h3.chart-heading {
+    text-align: center;
+}
+
+hr {
+    height: 1px;
+    border-top: 1px solid #333;
+}
+
+footer {
+    margin-top: 19px;
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #333;
+}
+
+.portrait {
+    text-align: center;
+}
+
+.portrait img{
+    height: 128px;
+    width: 128px;
+    border-radius: 64px;
+    border: 3px solid #666;
+}
+
+p.lead {
+    font-style: italic;
+    color: #aaa;
+    text-align: center;
+
+}
+
+.stat-text {
+    color: #aaa;
+}
+
+h3.stat-text {
+    color: #eee;
+}
+
+.stat-text p {
+    margin-left: 1em;
+    text-align: left;
+}
+
+/*
+.stat-list-text p {
+    border-bottom: 1px solid #333;
+}
+*/
+
+.stat-box {
+    text-align: center;
+    margin: 1em 5px;
+    padding: 5px;
+    font-size: 1em;
+    line-height: 1.2em;
+}
+
+.stat-box big {
+    display: block;
+    font-size: 3em;
+    line-height: 1.25em;
+    font-weight: bold;
+    font-variant: normal;
+    margin-top: 0.1em;
+}
+
+.stat-list > li > strong {
+    width: 4em;
+    display: inline-block;
+    float: right;
+}
+
+.stat-list-wide > li > strong {
+    width: 5em;
+}
+
+.stat-list {
+    list-style-type: none;
+    text-align: left;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    margin: 0.2em 0 0;
+    padding: 0 0 0 1em;
+}
+
+.chart-box {
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    position: relative;
+}
+
+.icon-text {
+    text-align: center;
+    color: #aaa;
+    background: transparent;
+}
+
+.icon-text img {
+    vertical-align: top;
+}
+
+.icon-text big {
+    font-size: 48px;
+    line-height: 64px;
+    font-weight: bold;
+    font-variant: normal;
+    margin-top: 0.1em;
+}
+
+.icon-group {
+    display: inline-block;
+    margin: 0 1em;
+}
+
+.mini-multi-text {
+    display: inline-block;
+    line-height: 1em;
+    text-align: left;
+}
+
+.chart-legend {
+    position: absolute;
+    bottom: 10%;
+    left: 15%;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.color-0 {
+    color: #aaa;
+    background: transparent;
+}
+
+.color-1 {
+    color: #00D348;
+    background: transparent;
+}
+
+.color-2 {
+    color: #FF8300;
+    background: transparent;
+}
+
+.color-3 {
+    color: #0693C2;
+    background: transparent;
+}
+
+.color-4 {
+    color: #FF2800;
+    background: transparent;
+}
+
+.background-1 {
+    background: #00D348;
+    color: #000;
+}
+
+.background-2 {
+    background: #FF8300;
+    color: #000;
+}
+
+.background-3 {
+    background: #0693C2;
+    color: #000;
+}
+
+.background-4 {
+    background: #FF2800;
+    color: #000;
+}
+
+.color-terrible  {
+    color: rgb(148, 6, 6);
+    background: transparent;
+}
+
+.color-bad  {
+    color: rgb(196, 72, 6);
+    background: transparent;
+}
+
+.color-neutral  {
+    color: rgb(148, 148, 148);
+    background: transparent;
+}
+
+.color-good  {
+    color: rgb(45, 103, 198);
+    background: transparent;
+}
+
+.color-excellent  {
+    color: rgb(26, 55, 141);
+    background: transparent;
+}
+
+#login-container,
+#wait-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+#year-container-container {
+    background: #222;
+    padding: 16px 0;
+}
+
+#login-container,
+#year-container-container, 
+#data-container {
+    display: none;
+}
+
+.year-list {
+    list-style-type: none;
+    font-size: 3em;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    height 128px;
+}
+
+.year-list li {
+    border: 3px solid #aaa;
+    border-radius: 0.5em;
+    padding: 0.2em;
+    text-align: center;
+    margin: 16px 8px;
+    color: #aaa;
+    background: #000;
+    cursor: pointer;
+    height: 96px;
+    display: inline-block;
+    font-size: 48px;
+}
+
+.year-list li.current {
+    color: white;
+    background: #223;
+}
+
+.year-list li:hover {
+    color: #fff;
+    background: #223;
+    border: 3px outset #fff;
+}
+
+.wait-text {
+    font-size: 4em;
+    color: #333;
+}

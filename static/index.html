@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your EVE Year</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="header">&nbsp;</div>
+
+
+
+
+
+    <!-- CONNECTION CONFIGURATION -->
+    <form action="https://login.eveonline.com/oauth/authorize/" method="GET">
+    <input type="hidden" name="response_type" value="token" />
+    <input type="hidden" name="redirect_uri" value="https://youreveyear.appspot.com" />
+    <input type="hidden" name="client_id" value="bc8cc0decbe74470927f8df9846f79b9" />
+    <input type="hidden" name="scope" value="publicData characterStatsRead" />
+    <!-- END CONNECTION CONFIGURATION -->
+
+
+    <div id="wait-container" class="container">
+        <p class="wait-text">Please wait...</p>
+    </div>
+
+    <div id="login-container" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>To view your yearly stats,</p>
+                <input type="image" src="https://images.contentful.com/idjq7aai9ylm/4fSjj56uD6CYwYyus4KmES/4f6385c91e6de56274d99496e6adebab/EVE_SSO_Login_Buttons_Large_Black.png?w=270&h=45" />
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <div id="year-container-container">
+        <div id="year-container" class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="portrait"></div>
+                </div>
+                <div class="col-md-8">
+                  <ul class="year-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="data-container" class="container">
+        <!-- Login stats -->
+        <div class="row">
+            <div class="col-md-4">
+                <h1 class="character-name">Character Name</h1>
+                <p class="lead">In <strong class="year">2014</strong>, you...</p>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box color-1">
+                    Logged in for <big data-field="characterMinutes">?????</big> minutes
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="stat-box color-2">
+                    Over <big data-field="characterSessionsStarted">???</big> sessions
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="stat-box color-3">
+                    Across <big data-field="daysOfActivity">???</big> distinct days
+                </div>
+            </div>
+        </div>
+        
+        <hr />
+        
+        <!-- Combat stats 2 -->
+        
+        <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+                <h3 class="stat-text">You killed...</h3>
+                <div class="stat-box stat-list-text">
+                    <ul class="stat-list stat-text">
+                        <li><strong data-field="combatKillsHighSec" class="color-1">??</strong> high sec</li>
+                        <li><strong data-field="combatKillsLowSec" class="color-2">??</strong> low sec</li>
+                        <li><strong data-field="combatKillsNullSec" class="color-4">??</strong> null sec</li>
+                        <li><strong data-field="combatKillsWormhole" class="color-3">??</strong> wormhole</li>
+                    </ul>
+                    <h4>And podded...</h4>
+                    <ul class="stat-list stat-text">
+                        <li><strong data-field="combatKillsPodHighSec" class="color-1">??</strong> high sec</li>
+                        <li><strong data-field="combatKillsPodLowSec" class="color-2">??</strong> low sec</li>
+                        <li><strong data-field="combatKillsPodNullSec" class="color-4">??</strong> null sec</li>
+                        <li><strong data-field="combatKillsPodWormhole" class="color-3">??</strong> wormhole</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="chart-box">
+                    <ul class="stat-list chart-legend">
+                        <li class="color-3">kills</li>
+                        <li class="color-4">losses</li>
+                    </ul>
+                    <canvas id="kills-deaths-chart" width="400" height="250"></canvas>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h3 class="stat-text">You lost...</h3>
+                <div class="stat-box stat-list-text">
+                    <ul class="stat-list stat-text">
+                        <li><strong data-field="combatDeathsHighSec" class="color-1">??</strong> high sec</li>
+                        <li><strong data-field="combatDeathsLowSec" class="color-2">??</strong> low sec</li>
+                        <li><strong data-field="combatDeathsNullSec" class="color-4">??</strong> null sec</li>
+                        <li><strong data-field="combatDeathsWormhole" class="color-3">??</strong> wormhole</li>
+                    </ul>
+                    <h4>And got podded...</h4>
+                    <ul class="stat-list stat-text">
+                        <li><strong data-field="combatDeathsPodHighSec" class="color-1">??</strong> high sec</li>
+                        <li><strong data-field="combatDeathsPodLowSec" class="color-2">??</strong> low sec</li>
+                        <li><strong data-field="combatDeathsPodNullSec" class="color-4">??</strong> null sec</li>
+                        <li><strong data-field="combatDeathsPodWormhole" class="color-3">??</strong> wormhole</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <hr />
+        
+        <!-- Combat damage stats -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="stat-text chart-heading">You damaged player ships...</h3>
+                <div class="chart-box">
+                    <canvas id="damage-dealt-chart" width="480" height="240"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3 class="stat-text chart-heading">Players damaged your ships...</h3>
+                <div class="chart-box">
+                    <canvas id="damage-received-chart" width="480" height="240"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- Tackle stats -->
+        <div class="row">
+            <div class="col-md-9">
+                <h3 class="stat-text">You tackled...</h3>
+                <div class="row">
+                    <div class="col-md-4 icon-text">
+                        <img src="https://image.eveonline.com/Type/3242_64.png" width="64" height="64" alt="Warp scrambled" />
+                        <big data-field="combatWarpScramblePC">???</big> x
+                    </div>
+                    <div class="col-md-4 icon-text">
+                        <img src="https://image.eveonline.com/Type/526_64.png" width="64" height="64" alt="Webbed" />
+                        <big data-field="combatWebifyingPC">???</big> x
+                    </div>
+                    <div class="col-md-4 icon-text">
+                        <img src="https://image.eveonline.com/Type/12269_64.png" width="64" height="64" alt="Cap drained" />
+                        <big data-field="combatCapDrainingPC">???</big> GJs
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h3 class="stat-text">You strove...</h3>
+                <div class="icon-text">
+                    <big data-field="moduleOverload">???</big> <span class="mini-multi-text">module<br/>overloads</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <h3 class="stat-text">You were tackled...</h3>
+                <div class="row">
+                    <div class="col-md-4 icon-text">
+                        <img src="https://image.eveonline.com/Type/3242_64.png" width="64" height="64" alt="Warp scrambled" />
+                        <big data-field="combatWarpScrambledbyPC">???</big> x
+                    </div>
+                    <div class="col-md-4 icon-text">
+                        <img src="https://image.eveonline.com/Type/526_64.png" width="64" height="64" alt="Webbed" />
+                        <big data-field="combatWebifiedbyPC">???</big> x
+                    </div>
+                    <div class="col-md-4 icon-text">
+                        <img src="https://image.eveonline.com/Type/12269_64.png" width="64" height="64" alt="Cap drained" />
+                        <big data-field="combatCapDrainedbyPC">???</big> GJs
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h3 class="stat-text">You gave up...</h3>
+                <div class="icon-text">
+                    <big data-field="combatSelfDestructs">???</big> <span class="mini-multi-text">self<br/>destructs</span>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- EWAR stats -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="stat-text">You tilted the odds...</h3>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 icon-text">
+                        <div class="icon-group">
+                            <img src="https://image.eveonline.com/Type/20070_64.png" width="64" height="64" alt="Links activated" />
+                            <big data-field="moduleActivationsGangCoordinator">???</big> x
+                        </div>
+                        <div class="icon-group">
+                            <img src="https://image.eveonline.com/Type/12709_64.png" width="64" height="64" alt="Target painters activated" />
+                            <big data-field="moduleActivationsTargetPainter">???</big> x
+                        </div>
+                        <div class="icon-group">
+                            <img src="https://image.eveonline.com/Type/1968_64.png" width="64" height="64" alt="Sensor dampeners activated" />
+                            <big data-field="moduleActivationsRemoteSensorDamper">???</big> x
+                        </div>
+                        <div class="icon-group">
+                            <img src="https://image.eveonline.com/Type/1957_64.png" width="64" height="64" alt="ECM activated" />
+                            <big data-field="moduleActivationsECM">???</big> x
+                        </div>
+                        <div class="icon-group">
+                            <img src="https://image.eveonline.com/Type/12261_64.png" width="64" height="64" alt="NOS activated" />
+                            <big data-field="moduleActivationsEnergyVampire">???</big> x
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        
+        <hr />
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="stat-text">You survived...</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stat-box stat-text stat-list-text">
+                    <h4>Local Repair</h4>
+                    <ul class="stat-list stat-list-wide">
+                        <li><strong data-field="combatRepairShieldSelfAmount" class="color-3">???</strong> shield</li>
+                        <li><strong data-field="combatRepairArmorSelfAmount" class="color-1">???</strong> armor</li>
+                        <li><strong data-field="combatRepairHullSelfAmount" class="color-4">???</strong> hull</li>
+                        <li>&nbsp;</li>
+                    </ul>
+                </div>
+                <div class="chart-box">
+                    <canvas id="local-tank-chart" width="200" height="200"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-box stat-text stat-list-text">
+                    <h4>Incoming Logistics</h4>
+                    <ul class="stat-list stat-list-wide">
+                        <li><strong data-field="combatRepairShieldByRemoteAmount" class="color-3">???</strong> shield</li>
+                        <li><strong data-field="combatRepairArmorByRemoteAmount" class="color-1">???</strong> armor</li>
+                        <li><strong data-field="combatRepairHullByRemoteAmount" class="color-4">???</strong> hull</li>
+                        <li><strong data-field="combatRepairCapacitorByRemoteAmount" class="color-2">???</strong> capacitor</li>
+                    </ul>
+                </div>
+                <div class="chart-box">
+                    <canvas id="incoming-tank-chart" width="200" height="200"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-box stat-text stat-list-text">
+                    <h4>Outgoing Logistics</h4>
+                    <ul class="stat-list stat-list-wide">
+                        <li><strong data-field="combatRepairShieldRemoteAmount" class="color-3">???</strong> shield</li>
+                        <li><strong data-field="combatRepairArmorRemoteAmount" class="color-1">???</strong> armor</li>
+                        <li><strong data-field="combatRepairHullRemoteAmount" class="color-4">???</strong> hull</li>
+                        <li><strong data-field="combatRepairCapacitorRemoteAmount" class="color-2">???</strong> capacitor</li>
+                    </ul>
+                </div>
+                <div class="chart-box">
+                    <canvas id="outgoing-tank-chart" width="200" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <hr />
+        
+        <!-- Aggression and Suspect stats -->
+        <!-- Assist and Duel stats -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="stat-text chart-heading">You fought others...</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+                <div class="stat-box color-2">
+                    Received <big data-field="combatPvpFlagSet">???</big> PvP aggression timers
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="stat-box color-3">
+                    Requested <big data-field="combatDuelRequested">???</big> duels
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-box color-4">
+                    Received <big data-field="combatCriminalFlagSet">???</big> criminal timers
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="stat-text chart-heading">You fought with others...</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+                <div class="stat-box color-2">
+                    Joined <big data-field="socialFleetJoins">???</big> fleets
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="stat-box color-3">
+                    Sent <big data-field="socialFleetBroadcasts">???</big> fleet broadcasts
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-box color-1">
+                    Assisted on <big data-field="combatKillsAssists">???</big> kills
+                </div>
+            </div>
+        </div>
+        
+        <hr />
+        
+        <!-- Travel stats -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="stat-text">You traveled...</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stat-box stat-text stat-list-text">
+                    <h4>Jumped gates/holes in...</h4>
+                    <ul class="stat-list">
+                        <li><strong data-field="travelJumpsStargateHighSec" class="color-1">??</strong> high sec</li>
+                        <li><strong data-field="travelJumpsStargateLowSec" class="color-2">??</strong> low sec</li>
+                        <li><strong data-field="travelJumpsStargateNullSec" class="color-4">??</strong> null sec</li>
+                        <li><strong data-field="travelJumpsWormhole" class="color-3">??</strong> wormhole</li>
+                    </ul>
+                </div>
+                <div class="chart-box">
+                    <canvas id="jumps-chart" width="200" height="200"></canvas>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box stat-text stat-list-text">
+                    <h4>Docked in...</h4>
+                    <ul class="stat-list">
+                        <li><strong data-field="travelDocksHighSec" class="color-1">??</strong> high sec</li>
+                        <li><strong data-field="travelDocksLowSec" class="color-2">??</strong> low sec</li>
+                        <li><strong data-field="travelDocksNullSec" class="color-4">??</strong> null sec</li>
+                        <li><strong data-field="travelDocksWormhole" class="color-3">
+                          <em title="Data not yet available from CCP">TBD</em></strong> wormhole</li>
+                    </ul>
+                </div>
+                <div class="chart-box">
+                    <canvas id="docks-chart" width="200" height="200"></canvas>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box stat-text stat-list-text">
+                    <h4>Activated warp in...</h4>
+                    <ul class="stat-list">
+                        <li><strong data-field="travelWarpsHighSec" class="color-1">??</strong> high sec</li>
+                        <li><strong data-field="travelWarpsLowSec" class="color-2">??</strong> low sec</li>
+                        <li><strong data-field="travelWarpsNullSec" class="color-4">??</strong> null sec</li>
+                        <li><strong data-field="travelWarpsWormhole" class="color-3">??</strong> wormhole</li>
+                    </ul>
+                </div>
+                <div class="chart-box">
+                    <canvas id="warps-chart" width="200" height="200"></canvas>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box stat-text stat-list-text">
+                    <h4>for a total AU of...</h4>
+                    <ul class="stat-list">
+                        <li><strong data-field="travelDistanceWarpedHighSec" class="color-1">??</strong> high sec</li>
+                        <li><strong data-field="travelDistanceWarpedLowSec" class="color-2">??</strong> low sec</li>
+                        <li><strong data-field="travelDistanceWarpedNullSec" class="color-4">??</strong> null sec</li>
+                        <li><strong data-field="travelDistanceWarpedWormhole" class="color-3">??</strong> wormhole</li>
+                    </ul>
+                </div>
+                <div class="chart-box">
+                    <canvas id="warp-distance-chart" width="200" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+                <div class="stat-box stat-text stat-list-text">
+                    <ul class="stat-list">
+                        <li><strong data-field="travelWarpsToCelestial" class="color-2">??</strong> warps to a celestial</li>
+                        <li><strong data-field="travelWarpsToBookmark" class="color-3">??</strong> warps to a bookmark</li>
+                        <li><strong data-field="travelWarpsToFleetMember" class="color-4">??</strong> warps to a fleet member</li>
+                        <li><strong data-field="travelWarpsToScanResult" class="color-1">??</strong> warps to a scan result</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+                <div class="stat-box stat-text stat-list-text">
+                    <ul class="stat-list">
+                        <li><strong data-field="moduleActivationsCynosuralField" class="color-2">??</strong> cynos lit</li>
+                        <li><strong data-field="moduleActivationsCloakingDevice" class="color-3">??</strong> cloak activations</li>
+                        <li><strong data-field="travelAccelerationGateActivations" class="color-4">??</strong> accel gates activated</li>
+                        <li><strong data-field="travelAlignTo" class="color-1">??</strong> total alignments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- Exploration stats -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="stat-text">You explored...</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stat-box color-3">
+                    Triggered <big data-field="genericConeScans">???</big> directional scans
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-box color-1">
+                    Triggered <big data-field="genericRequestScans">???</big> probe scans
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-box color-2">
+                    Succeeded at <big data-field="industryHackingSuccesses">???</big> hacking attempts
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        
+        <!-- Standings stats -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="stat-text">You interacted...</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="chart-box">
+                    <canvas id="outgoing-contact-chart" width="240" height="240"></canvas>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box stat-text stat-list-text">
+                    <h4>Your view of others</h4>
+                    <ul class="stat-list">
+                        <li><strong data-field="socialAddContactHorrible" class="color-terrible">99</strong> terrible</li>
+                        <li><strong data-field="socialAddContactBad" class="color-bad">99</strong> bad</li>
+                        <li><strong data-field="socialAddContactNeutral" class="color-neutral">99</strong> neutral</li>
+                        <li><strong data-field="socialAddContactGood" class="color-good">99</strong> good</li>
+                        <li><strong data-field="socialAddContactHigh" class="color-excellent">99</strong> excellent</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="chart-box">
+                    <canvas id="incoming-contact-chart" width="240" height="240"></canvas>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box stat-text stat-list-text">
+                    <h4>Others' view of you</h4>
+                    <ul class="stat-list">
+                        <li><strong data-field="socialAddedAsContactHorrible" class="color-terrible">99</strong> terrible</li>
+                        <li><strong data-field="socialAddedAsContactBad" class="color-bad">99</strong> bad</li>
+                        <li><strong data-field="socialAddedAsContactNeutral" class="color-neutral">99</strong> neutral</li>
+                        <li><strong data-field="socialAddedAsContactGood" class="color-good">99</strong> good</li>
+                        <li><strong data-field="socialAddedAsContactHigh" class="color-excellent">99</strong> excellent</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stat-box color-4">
+                    Typed a total of <big data-field="socialChatTotalMessageLength">???</big> characters in chat
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box color-1">
+                    Traded <big data-field="socialDirectTrades">???</big> times with players
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box color-3">
+                    Sent <big data-field="socialMailsSent">???</big> mail messages
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-box color-2">
+                    Received <big data-field="socialMailsReceived">???</big> mail messages
+                </div>
+            </div>
+        </div>
+        
+        <hr />
+        
+        <!-- Isk, Mission, and Ratting stats -->
+        <div class="row">
+            <div class="col-md-5">
+                <h3 class="stat-text">You did business...</h3>
+                <div class="stat-box color-1">
+                    Total ISK earned <big data-field="iskIn">??????</big> (<strong data-field="marketISKGained">??</strong> from market orders)
+                </div>
+                <div class="stat-box color-4">
+                    Total ISK spent <big data-field="iskOut">??????</big> (<strong data-field="marketISKSpent">??</strong> for market orders)
+                </div>
+            </div>
+            <div class="col-md-2">
+                <h3 class="stat-text">missioned...</h3>
+                <div class="stat-box color-2">
+                    Turned in <big data-field="pveMissionsSucceeded">???</big> missions
+                </div>
+                <div class="stat-box color-3">
+                    including <big data-field="pveMissionsSucceededEpicArc">???</big> from epic arcs
+                </div>
+            </div>
+            <div class="col-md-5">
+                <h3 class="stat-text">and ratted...</h3>
+                <div class="stat-box color-4">
+                    Received <big data-field="combatNpcFlagSet">???</big> NPC aggression timers
+                </div>
+                <div class="stat-box color-1">
+                    Tanked a total of <big data-field="combatDamageFromNPCsAmount">??????</big> damage from NPCs
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="stat-box stat-text stat-list-text">
+                    <ul class="stat-list">
+                        <li><strong data-field="marketBuyOrdersPlaced" class="color-1">??</strong> buy orders placed</li>
+                        <li><strong data-field="marketSellOrdersPlaced" class="color-1">??</strong> sell orders placed</li>
+                        <li><strong data-field="marketModifyMarketOrder" class="color-2">??</strong> orders modified</li>
+                        <li><strong data-field="marketCancelMarketOrder" class="color-4">??</strong> orders cancelled</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="stat-box stat-text stat-list-text">
+                    <ul class="stat-list">
+                        <li><strong data-field="marketCreateContractsItemExchange" class="color-3">??</strong> item exchange contracts created</li>
+                        <li><strong data-field="marketAcceptContractsItemExchange" class="color-3">??</strong> item exchange contracts accepted</li>
+                        <li><strong data-field="marketAcceptContractsCourier" class="color-3">??</strong> courier contracts accepted</li>
+                        <li><strong data-field="marketDeliverCourierContract" class="color-3">??</strong> courier contracts delivered</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <hr />
+        
+        <!-- Mining stats -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="stat-text">You mined...</h3>
+                <div class="chart-box">
+                    <canvas id="mining-chart" width="480" height="240"></canvas>
+                </div>
+            </div>
+        </div> 
+
+        <hr />
+
+        <!-- Industry stats -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="stat-text">You manufactured...</h3>
+                <div class="stat-box stat-text stat-list-text">
+                    <ul class="stat-list">
+                        <li><strong data-field="industryJobsCompletedManufactureAsteroidQuantity" class="color-2">??</strong> compressed ore</li>
+                        <li><strong data-field="industryJobsCompletedManufactureChargeQuantity" class="color-2">??</strong> ammo</li>
+                        <li><strong data-field="industryJobsCompletedManufactureCommodityQuantity" class="color-2">??</strong> commodities</li>
+                        <li><strong data-field="industryJobsCompletedManufactureDeployableQuantity" class="color-2">??</strong> deployables</li>
+                        <li><strong data-field="industryJobsCompletedManufactureDroneQuantity" class="color-2">??</strong> drones</li>
+                        <li><strong data-field="industryJobsCompletedManufactureImplantQuantity" class="color-2">??</strong> implants</li>
+                        <li><strong data-field="industryJobsCompletedManufactureModuleQuantity" class="color-2">??</strong> modules</li>
+                        <li><strong data-field="industryJobsCompletedManufactureShipQuantity" class="color-2">??</strong> ships</li>
+                        <li><strong data-field="industryJobsCompletedManufactureStructureQuantity" class="color-2">??</strong> structures</li>
+                        <li><strong data-field="industryJobsCompletedManufactureSubsystemQuantity" class="color-2">??</strong> subsystems</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3 class="stat-text">You researched...</h3>
+                <div class="stat-box stat-text stat-list-text">
+                    <ul class="stat-list">
+                        <li><strong data-field="industryJobsCompletedMaterialProductivity" class="color-3">??</strong> material efficiency</li>
+                        <li><strong data-field="industryJobsCompletedTimeProductivity" class="color-3">??</strong> time efficiency</li>
+                        <li><strong data-field="industryJobsCompletedInvention" class="color-3">??</strong> invention</li>
+                        <li><strong data-field="industryJobsCompletedCopyBlueprint" class="color-3">??</strong> copying</li>
+                    </ul>
+                </div>
+                <h3 class="stat-text">You discarded...</h3>
+                <div class="stat-box stat-text stat-list-text">
+                    <ul class="stat-list">
+                        <li><strong data-field="inventoryTrashItemQuantity" class="color-4">??</strong> items trashed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p class="pull-right">&copy; 2014-2016 Amber Yust (<a href="https://twitter.com/Aiiane">@aiiane</a>)</p>
+            <p>Data and image assets courtesy of CCP Games</p>
+        </footer>
+    </div><!-- container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="Chart.min.js"></script>
+    <script type="text/javascript" src="Chart.HorizontalBar.js"></script>
+    <script type="text/javascript" src="charts.js"></script>
+  </body>
+</html>
